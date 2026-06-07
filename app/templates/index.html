@@ -2,6 +2,26 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <style>
+            body {
+                font-family: Arial;
+                max-width : 600px;
+                margin: auto;
+                padding:20px;
+            }
+
+            input {
+                padding: 10px;
+                margin: 6px;
+                width: 200px;
+            }
+
+            h2 {
+                color: green;
+            }
+            
+        </style>
+    </head>
         <body>
             <h1>"California Housing Price Predictor" </h1>
             <form action="/predict" method="POST"> 
@@ -22,8 +42,9 @@
                 <label> Longitude </label>
                 <input type="name" name="Longitude" required>
                 <input type="submit" value="Predict Price">
-             </form>
+            </form>
+            {% if prediction %}
+            <h2>Predicted Price: ${{prediction}}</h2>
+            {% endif %}
         </body>
-    </head>
 </html>
-
