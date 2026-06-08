@@ -5,46 +5,121 @@
         <style>
             body {
                 font-family: Arial;
-                max-width : 600px;
+                max-width: 900px;
                 margin: auto;
-                padding:20px;
+                padding: 20px;
             }
 
             input {
                 padding: 10px;
                 margin: 6px;
-                width: 200px;
+                width: 180px;
             }
 
             h2 {
                 color: green;
             }
-            
+
+            .form-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .container {
+                display: flex;
+                gap: 20px;
+            }
+
+            .sidebar {
+                width: 220px;
+                background: #f5f5f5;
+                padding: 15px;
+                border-radius: 5px;
+            }
+
+            input[type="submit"] {
+                background-color: blue;
+                color: white;
+                cursor: pointer;
+                margin-top: 10px;
+            }
         </style>
     </head>
-        <body>
-            <h1>"California Housing Price Predictor" </h1>
-            <form action="/predict" method="POST"> 
-                <label> Median income </label>
-                <input type="number" name="MedInc" required>
-                <label> House Age </label>
-                <input type="number" name="HouseAge" required>
-                <label> AveRooms </label>
-                <input type="number" name="AveRooms" required>
-                <label> AveBedrms </label>
-                <input type="number" name="AveBedrms" required>
-                <label> Population </label>
-                <input type="number" name="Population" required>
-                <label> AveOccup </label>
-                <input type="number" name="AveOccup" required>
-                <label> Latitude </label>
-                <input type="number" name="Latitude" required>
-                <label> Longitude </label>
-                <input type="name" name="Longitude" required>
-                <input type="submit" value="Predict Price">
-            </form>
-            {% if prediction %}
-            <h2>Predicted Price: ${{prediction}}</h2>
-            {% endif %}
-        </body>
+    <body>
+        <h1>"California Housing Price Predictor"</h1>
+        <p>This app predicts California house prices based on location and housing features.</p>
+
+        <button type="button" onclick="fillSanFrancisco()">San Francisco</button>
+        <button type="button" onclick="fillRural()">Rural Area</button>
+        <br><br>
+
+        <div class="container">
+            <div>
+                <form action="/predict" method="POST">
+                    <div class="form-grid">
+                        <label>Median Income</label>
+                        <input type="number" name="MedInc" step="0.1" required>
+                        <label>House Age</label>
+                        <input type="number" name="HouseAge" required>
+                        <label>Ave Rooms</label>
+                        <input type="number" name="AveRooms" step="0.1" required>
+                        <label>Ave Bedrooms</label>
+                        <input type="number" name="AveBedrms" step="0.1" required>
+                        <label>Population</label>
+                        <input type="number" name="Population" required>
+                        <label>Ave Occupants</label>
+                        <input type="number" name="AveOccup" step="0.1" required>
+                        <label>Latitude</label>
+                        <input type="number" name="Latitude" step="0.01" required>
+                        <label>Longitude</label>
+                        <input type="number" name="Longitude" step="0.01" required>
+                    </div>
+                    <input type="submit" value="Predict Price">
+                </form>
+
+                {% if prediction %}
+                <h2>Predicted Price: ${{ prediction }}</h2>
+                {% endif %}
+            </div>
+
+            <div class="sidebar">
+                <h3>Feature Descriptions</h3>
+                <p><b>MedInc:</b> Median income ($10,000s)</p>
+                <p><b>HouseAge:</b> Age of house in years</p>
+                <p><b>AveRooms:</b> Average rooms per house</p>
+                <p><b>AveBedrms:</b> Average bedrooms per house</p>
+                <p><b>Population:</b> District population</p>
+                <p><b>AveOccup:</b> Average occupants per house</p>
+                <p><b>Latitude:</b> Geographic latitude</p>
+                <p><b>Longitude:</b> Geographic longitude</p>
+            </div>
+        </div>
+
+        <h3>How does this work?</h3>
+        <p>This app uses a Random Forest model trained on California housing data. It uses 12 features to predict the house price. Enter the details above and click Predict Price!</p>
+
+        <script>
+        function fillSanFrancisco() {
+            document.querySelector('[name=MedInc]').value = 8.0;
+            document.querySelector('[name=HouseAge]').value = 30;
+            document.querySelector('[name=AveRooms]').value = 5.0;
+            document.querySelector('[name=AveBedrms]').value = 1.0;
+            document.querySelector('[name=Population]').value = 800;
+            document.querySelector('[name=AveOccup]').value = 2.5;
+            document.querySelector('[name=Latitude]').value = 37.77;
+            document.querySelector('[name=Longitude]').value = -122.4;
+        }
+        function fillRural() {
+            document.querySelector('[name=MedInc]').value = 2.0;
+            document.querySelector('[name=HouseAge]').value = 20;
+            document.querySelector('[name=AveRooms]').value = 6.0;
+            document.querySelector('[name=AveBedrms]').value = 1.2;
+            document.querySelector('[name=Population]').value = 500;
+            document.querySelector('[name=AveOccup]').value = 3.0;
+            document.querySelector('[name=Latitude]').value = 40.0;
+            document.querySelector('[name=Longitude]').value = -120.0;
+        }
+        </script>
+    </body>
 </html>
