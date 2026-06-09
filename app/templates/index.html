@@ -81,6 +81,10 @@
                 {% if prediction %}
                 <h2>Predicted Price: ${{ prediction }}</h2>
                 {% endif %}
+                
+                {% if error %}
+                <h3 style="color: red;">{{error}}</h3>
+                {% endif %}
             </div>
 
             <div class="sidebar">
