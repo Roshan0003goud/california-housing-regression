@@ -82,8 +82,10 @@
                 <h2>Predicted Price: ${{ prediction }}</h2>
                 {% endif %}
                 
-                {% if error %}
-                <h3 style="color: red;">{{error}}</h3>
+                {% if errors %}
+                    {% for error in errors%}
+                        <p style="color: red;">{{error}}</p>
+                    {% endfor %}
                 {% endif %}
             </div>
 

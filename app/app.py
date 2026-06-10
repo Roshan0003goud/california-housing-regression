@@ -22,8 +22,29 @@ def predict():
     Latitude= float(request.form.get('Latitude'))
     Longitude=float(request.form.get('Longitude'))
     
-    if AveRooms <= 0 or Population <= 0 or HouseAge < 0 or MedInc <= 0:
-        return render_template('index.html', error='Please enter valid positive values!')
+    errors = []
+    
+    if MedInc <= 0:
+        errors.append("Median Income must be greater than 0!")
+    
+    if HouseAge < 0:
+        errors.append("error, HouseAge cannot be in negative")
+    
+    if AveRooms <=0:
+        errors.append("error, Averooms must be greater than 0!")
+    
+    if AveBedrms <=0:
+        errors.append("error, Avebedrooms must be greater than 0!")
+    
+    if Population <=0:
+        errors.append("error, population must be greater than 0")
+    
+    if AveOccup <=0:
+        errors.append("error, occupation must be grater than 0!")
+        
+    if errors:
+        return render_template('index.html', errors=errors)
+    
     
             
     RoomsPerHousehold = AveRooms / AveOccup
