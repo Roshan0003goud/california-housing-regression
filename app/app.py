@@ -42,6 +42,9 @@ def predict():
     if AveOccup <=0:
         errors.append("error, occupation must be grater than 0!")
         
+    if not (32.5 <= Latitude <= 42.0) or not (-124.5 <= Longitude <= -114.1):
+        errors.append("error, Latitude and longitude are must be on the california ")
+        
     if errors:
         return render_template('index.html', errors=errors)
     
