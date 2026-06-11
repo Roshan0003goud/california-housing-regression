@@ -54,8 +54,7 @@ def predict():
     scaled_input = np.array([[MedInc, HouseAge, AveRooms, AveBedrms, Population, AveOccup, Latitude, Longitude, RoomsPerHousehold, BedroomPerRoom, PopulationPerHousehold, Distance_from_coast]])
     scaled_input = scaler.transform(scaled_input)
     prediction = model.predict(scaled_input)
-    return render_template('index.html', prediction=round(prediction[0] * 100000, 2))
-
+    return render_template('index.html', prediction=round(prediction[0] * 100000, 2), latitude=Latitude, longitude=Longitude)
     
 
 if __name__ == '__main__':

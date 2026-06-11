@@ -81,6 +81,20 @@
                 {% if prediction %}
                 <h2>Predicted Price: ${{ prediction }}</h2>
                 {% endif %}
+
+                {% if latitude and longitude %}
+                <h3>Location Map</h3>
+                <div id="map" style="height: 300px; width: 100%; margin-top: 10px;"></div>
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+                <script>
+                    var map = L.map('map').setView([{{ latitude }}, {{ longitude }}], 10);
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+                    L.marker([{{ latitude }}, {{ longitude }}]).addTo(map);
+                </script>
+                {% endif %}
+
+                
                 
                 {% if errors %}
                     {% for error in errors%}
