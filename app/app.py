@@ -8,11 +8,13 @@ scaler = joblib.load('data/scaler.pkl')
 app = Flask(__name__)
 @app.route('/')
 def home():
+    """Renders the home page."""
     return render_template('index.html')
 
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    """Takes user unput from the form and returns a house price predict."""
     MedInc= float(request.form.get('MedInc'))
     HouseAge= float(request.form.get("HouseAge"))
     AveRooms= float(request.form.get('AveRooms'))
